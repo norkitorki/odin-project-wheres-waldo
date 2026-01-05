@@ -1,17 +1,17 @@
-import React from "react"
-import { createRoot } from "react-dom/client"
-import { Application } from "@thoughtbot/superglue"
-import { buildVisitAndRemote } from "./application_visit"
-import { pageIdentifierToPageComponent } from "./page_to_page_mapping"
-import { store } from "./store"
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Application } from '@thoughtbot/superglue';
+import { buildVisitAndRemote } from '../application_visit';
+import { pageIdentifierToPageComponent } from '../page_to_page_mapping';
+import { store } from '../store';
 
-if (typeof window !== "undefined") {
-  document.addEventListener("DOMContentLoaded", function() {
-    const appEl = document.getElementById("app")
-    const location = window.location
+if (typeof window !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function () {
+    const appEl = document.getElementById('app');
+    const location = window.location;
 
     if (appEl) {
-      const root = createRoot(appEl)
+      const root = createRoot(appEl);
       root.render(
         <Application
           // The base url prefixed to all calls made by the `visit`
@@ -29,7 +29,7 @@ if (typeof window !== "undefined") {
           // Mapping between the page identifier to page component
           mapping={pageIdentifierToPageComponent}
         />
-      )
+      );
     }
-  })
+  });
 }

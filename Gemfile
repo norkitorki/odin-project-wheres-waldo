@@ -66,3 +66,4 @@ group :test do
 end
 
 gem "superglue"
+gem "vite_rails"

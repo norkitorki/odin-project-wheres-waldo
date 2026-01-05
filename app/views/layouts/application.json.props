@@ -1,13 +1,15 @@
 path = request.format.json? ? param_to_dig_path(params[:props_at]) : nil
 
 json.data(dig: path) do
+  json.currentUser @current_user
+
   yield json
 end
 
 json.componentIdentifier active_template_virtual_path
 json.defers json.deferred!
 json.fragments json.fragments!
-json.assets [ asset_path('application.js') ]
+json.assets [ asset_path('/app/javascript/entrypoints/application.js') ]
 
 if protect_against_forgery?
   json.csrfToken form_authenticity_token
