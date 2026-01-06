@@ -67,3 +67,4 @@ end
 
 gem "superglue"
 gem "vite_rails"
+gem "activerecord-session_store"
