@@ -14,7 +14,3 @@ if @new_user
     json.formErrors flash[:user_errors]
   end
 end
-
-json.gameState session[:game]
-
-json.user session[:user]

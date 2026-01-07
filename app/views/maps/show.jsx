@@ -6,9 +6,7 @@ import { mapImages } from '@javascript/mapImages';
 import { Layout } from '@javascript/components';
 
 export default function MapShow() {
-  const { map, findables, newUser, gameState, user } = useContent();
-
-  console.log(gameState, user);
+  const { map, findables, newUser } = useContent();
 
   const mapImage = mapImages[map.name.toLowerCase()];
   const findablesWithImages = findables.map((findable) => ({
