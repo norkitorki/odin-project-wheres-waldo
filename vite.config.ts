@@ -7,6 +7,8 @@ export default defineConfig({
     alias: {
       '@views': path.resolve(__dirname, 'app/views'),
       '@javascript': path.resolve(__dirname, 'app/javascript'),
+      '@images': path.resolve(__dirname, 'app/assets/images'),
+      '@stylesheets': path.resolve(__dirname, 'app/assets/stylesheets')
     },
   },
   plugins: [RubyPlugin()],
