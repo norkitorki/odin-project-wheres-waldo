@@ -1,0 +1,7 @@
+one:
+  name: 'Waldo City'
+  findables: one
+
+two:
+  name: 'Busy Beach'
+  findables: one
