@@ -1,4 +1,6 @@
 class Coordinate < ApplicationRecord
+  self.implicit_order_column = [ :map_id ]
+
   belongs_to :findable
   belongs_to :map
 
