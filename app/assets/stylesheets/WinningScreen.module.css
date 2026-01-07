@@ -1,0 +1,112 @@
+.container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #ffffff;
+  background: #2e2a2ad8;
+  font-size: 2rem;
+  text-align: center;
+  z-index: 1000;
+}
+
+.container > h2 {
+  font-size: 2.5rem;
+  color: #59eea9;
+  text-decoration: underline;
+}
+
+.highlighted {
+  display: inline-block;
+  color: #59eea9;
+}
+
+.form {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.form label {
+  display: block;
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.form input {
+  font-size: 1.4rem;
+  padding: 0.6rem;
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.button {
+  width: max-content;
+  display: inline-block;
+  color: #dad5d5;
+  background: #59eea833;
+  font-size: 1.4rem;
+  text-decoration: none;
+  padding: 0.6rem;
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.button > * {
+  vertical-align: middle;
+}
+
+.button > svg {
+  display: inline-block;
+  height: 26px;
+  padding-right: 0.3rem;
+  fill: #59eea8;
+}
+
+.submitButton {
+  composes: button;
+  border-radius: 0 8px 8px 0;
+}
+
+.button:hover,
+.button:focus {
+  background: #59eea844;
+  outline: 2px solid #59eea8;
+}
+
+.formErrors {
+  color: #ffffff;
+  background: #8a0808;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  padding: 0.4rem;
+  border-radius: 8px;
+}
+
+.rankings {
+  background: #2e2a2aef;
+  border: 2px solid #59eea9;
+}
+
+.rankings th,
+.rankings td {
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.rankings thead {
+  font-size: 1.4rem;
+}
+
+.rankings tbody {
+  font-size: 1rem;
+  font-weight: normal;
+}

@@ -1,0 +1,68 @@
+.imageContainer {
+  background: no-repeat center url('@images/maps/troy.jpg');
+  /* background: #2e2a2ad8; */
+}
+
+.container {
+  height: 90vh;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background: #2e2a2ae5;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.contaienr h1 > span {
+  color: #59eea9;
+}
+
+.pagination > * {
+  color: #ffffff;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pagination > span {
+  padding: 0 0.25rem;
+}
+
+.pagination input {
+  max-width: 35px;
+}
+
+.scores {
+  padding: 1rem;
+  resize: both;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.scores table {
+  width: 100%;
+}
+
+.scores th,
+.scores td {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ffffff27;
+}
+
+.scores th {
+  font-weight: bold;
+  border-color: #59eea9;
+}
+
+.userScore {
+  color: #59eea9;
+  font-weight: bold;
+}

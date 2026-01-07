@@ -1,0 +1,26 @@
+json.maps do
+  json.array! @maps do |map|
+    json.id map.id
+    json.name map.name
+    json.mapPath map_path(map)
+    json.scoresPath scoreboard_path(map)
+  end
+end
+
+if @current_user
+  json.currentUser @current_user
+  json.userPath user_path(@current_user)
+
+  json.authForm do
+    form_props(url: authentications_path, method: 'delete') do |f|
+      f.submit 'Sign Out'
+    end
+  end
+else
+  json.authForm do
+    form_props(url: authentications_path, method: 'post') do |f|
+      f.text_field :token
+      f.submit 'Sign In'
+    end
+  end
+end

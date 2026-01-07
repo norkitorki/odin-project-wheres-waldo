@@ -1,0 +1,46 @@
+.image {
+  z-index: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+.targetCircle {
+  display: none;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 4px solid #59eea9;
+  transition: all 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.missedClick {
+  border-color: red;
+  scale: 1.5;
+}
+
+.itemMarker {
+  composes: targetCircle;
+  border: 4px solid #59eea9;
+  transform: scale(1.5);
+  z-index: 2;
+}
+
+.itemMarker:hover,
+.itemMarker:focus {
+  transform: scale(2);
+}
+
+.modal {
+  composes: container from './ItemSelector.module.css';
+  font-weight: bold;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

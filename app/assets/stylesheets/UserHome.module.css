@@ -1,0 +1,96 @@
+.heading {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 3.5rem;
+}
+
+h2.heading {
+  font-size: 2rem;
+  padding: 0 0 1rem 0;
+}
+
+h3.heading {
+  font-size: 1.8rem;
+  padding: 0 0 1rem 0;
+}
+
+.heading > span {
+  color: #59eea9;
+}
+
+.tokenWarning {
+  font-size: 1.25rem;
+}
+
+.tokenWarning > span {
+  color: #8a0808;
+}
+
+.userToken {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.userToken > p {
+  padding-bottom: 1rem;
+}
+
+.userToken input {
+  width: 225px;
+  text-align: center;
+}
+
+.deleteForm {
+  width: max-content;
+  margin: 1rem auto;
+}
+
+.deleteButton{
+  composes: button from './WinningScreen.module.css';
+}
+
+.deleteButton {
+  background: #8a0808;
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
+  background: #8a0808da;
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.scores > li {
+  display: inline-block;
+  text-align: center;
+}
+
+.scores img {
+  max-height: 100px;
+}
+
+.scores p {
+  padding: 0.25rem 0;
+}
+
+.scores a {
+  display: inline-block;
+  color: #59eea8;
+  padding: 0.25rem;
+  text-decoration: none;
+}
+
+.scores a:hover,
+.scores a:focus {
+  text-decoration: underline;
+}

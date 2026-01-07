@@ -1,0 +1,34 @@
+.container {
+  position: absolute;
+  display: none;
+  width: max-content;
+  color: #ffffff;
+  background-color: #2e2a2aec;
+  outline: 1px solid #59eea9;
+  padding: 0.5rem;
+  border-radius: 0 12px 12px 12px;
+  transition: all 0.2s ease-in-out;
+  z-index: 1000;
+}
+
+.button {
+  min-height: 44px;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  font-weight: bold;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
+.button:hover,
+.button:focus {
+  border-color: #59eea9;
+}
+
+.button > img {
+  max-height: 30px;
+}

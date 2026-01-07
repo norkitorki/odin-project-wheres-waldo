@@ -1,0 +1,18 @@
+json.user do
+  json.name @current_user.name
+  json.token @current_user.token
+end
+
+json.scores do
+  json.array! @scores do |score|
+    json.map score.map
+    json.value score.value
+    json.creationDate score.created_at.strftime("%-d %B %H:%M:%S")
+  end
+end
+
+json.deleteForm do
+  form_props(url: '/user', method: 'delete') do |f|
+    f.submit 'Delete User'
+  end
+end

@@ -4,6 +4,8 @@ import { Application } from '@thoughtbot/superglue';
 import { buildVisitAndRemote } from '../application_visit';
 import { pageIdentifierToPageComponent } from '../page_to_page_mapping';
 import { store } from '../store';
+import '@stylesheets/meyer-reset.css';
+import '@stylesheets/main.css';
 
 if (typeof window !== 'undefined') {
   document.addEventListener('DOMContentLoaded', function () {

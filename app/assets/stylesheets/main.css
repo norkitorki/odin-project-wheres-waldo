@@ -1,0 +1,29 @@
+body {
+  min-width: 340px;
+  color: #ffffff;
+  background: #2e2a2a;
+  font-family: serif, Times;
+}
+
+.flash-success,
+.flash-notice,
+.flash-alert {
+  text-align: center;
+  position: fixed;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  max-width: min(300px, 80vw);
+  color: #ffffff;
+  background: #2e2a2aec;
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+  outline: 1px solid #59eea9;
+  z-index: 2000;
+}
+
+.flash-alert {
+  background: #750808;
+}

@@ -1,0 +1,5 @@
+json.map @map
+
+json.page @page
+
+json.personalBest @personal_best

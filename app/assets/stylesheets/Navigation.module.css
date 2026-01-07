@@ -1,0 +1,126 @@
+.navigation {
+  width: max-content;
+  min-width: 300px;
+  height: max-content; /* 36px */
+  position: fixed;
+  left: -5000px;
+  top: 9px;
+  font-weight: bold;
+  padding: 0.5rem;
+  background: #2e2a2ade;
+  border-radius: 0 12px 12px 0;
+  outline: 1px solid #59eea9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  z-index: 3000;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+
+.narrow {
+  max-width: 95vw;
+  flex-direction: column;
+}
+
+.navigation > a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navigation.extended {
+  left: 0;
+}
+
+.extended .trigger {
+  top: 52px;
+  left: 0;
+  border-right: 0px;
+  border-radius: 0 0 12px 0;
+}
+
+.trigger {
+  width: max-content;
+  height: 42px;
+  background: #59eea9;
+  font-weight: bold;
+  position: fixed;
+  top: 9px;
+  left: 0;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  transition: all 0.25s ease-in-out;
+}
+
+.trigger:hover,
+.trigger:focus,
+.trigger:active {
+  left: 0;
+}
+
+.navigation > a:focus,
+.navigation > a:hover {
+  text-decoration: underline;
+  text-decoration-color: #59eea9;
+}
+
+.authentication {
+  width: max-content;
+  height: 36px;
+}
+
+.signedOut label {
+  display: none;
+  padding-right: 0.4rem;
+}
+
+.signedIn,
+.signedOut {
+  border-radius: 8px;
+}
+
+.signedIn > span,
+.signedOut > span {
+  padding-right: 0.5rem;
+}
+
+.signedIn a {
+  color: inherit;
+}
+
+.authentication button[type='submit'] {
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+}
+
+.signedIn > button {
+  background: #a10d0d;
+}
+
+.signedOut * {
+  display: inline-block;
+}
+
+.signedOut input {
+  max-height: 36px;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 8px 0 0 8px;
+}
+
+.authentication * {
+  height: 100%;
+}
+
+.authentication button[type='submit'] {
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.signedOut > button[type='submit'] {
+  background: #088d08;
+  border-radius: 0 8px 8px 0;
+}

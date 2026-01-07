@@ -1,0 +1,20 @@
+json.map @map
+
+json.findables @findables
+
+if @new_user
+  json.newUser do
+    json.form do
+      form_props(model: @new_user, url: users_path) do |f|
+        f.text_field :name
+        f.submit
+      end
+    end
+
+    json.formErrors flash[:user_errors]
+  end
+end
+
+json.gameState session[:game]
+
+json.user session[:user]
