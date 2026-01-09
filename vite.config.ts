@@ -8,8 +8,13 @@ export default defineConfig({
       '@views': path.resolve(__dirname, 'app/views'),
       '@javascript': path.resolve(__dirname, 'app/javascript'),
       '@images': path.resolve(__dirname, 'app/assets/images'),
-      '@stylesheets': path.resolve(__dirname, 'app/assets/stylesheets')
+      '@stylesheets': path.resolve(__dirname, 'app/assets/stylesheets'),
     },
   },
   plugins: [RubyPlugin()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.js',
+  },
 });

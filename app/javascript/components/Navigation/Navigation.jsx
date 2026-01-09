@@ -61,13 +61,18 @@ export default function Navigation({ links = [] }) {
     const isExtended = nav.classList.toggle(styles.extended);
     const navBottom = nav.getBoundingClientRect().bottom;
 
+    trigger.ariaLabel = `${isExtended ? 'Close' : 'Open'} navigation menu`;
     trigger.style.top = isExtended ? `${navBottom}px` : '9px';
     trigger.textContent = `${isExtended ? 'Close' : 'Open'} Menu`;
   };
 
   return (
     <nav className={styles.navigation} ref={navRef}>
-      <button className={styles.trigger} aria-label="Show navigation menu" onClick={showNav}>
+      <button
+        className={styles.trigger}
+        aria-label="Open navigation menu"
+        onClick={showNav}
+      >
         Open Menu
       </button>
       {links.map((link, index) =>
