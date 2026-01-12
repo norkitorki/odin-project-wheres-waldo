@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from '@stylesheets/WinningScreen.module.css';
-import icons from '../Icons/Icons.jsx';
-import { Form, SubmitButton, TextField } from '../Inputs';
+import icons from '@javascript/components/Icons/Icons';
+import { Form, SubmitButton, TextField } from '@javascript/components/Inputs';
 import { _fetch } from '@javascript/utils.js';
 
 const Highlight = ({ textContent }) => {
@@ -14,7 +14,10 @@ export default function WinningScreen({ map, discoveries, newUser }) {
   const inputRef = useRef();
 
   useEffect(() => {
-    _fetch('/score', 'GET', async (score) => {
+    (async () => {
+      const response = await _fetch('/score', 'GET');
+      const score = await response.json();
+
       if (
         (score && score.best && score.value > score.best) ||
         (score && !score.best && !newUser)
@@ -23,17 +26,17 @@ export default function WinningScreen({ map, discoveries, newUser }) {
       }
 
       await _fetch(
-        `/scores?map_id=${map.id}&page=1&per_page=12`,
+        `/scores?map_id=${map.id}&page=1&per_page=10`,
         'GET',
         (rankings) => setRankings(rankings)
       );
 
       setScore(score);
-    });
+    })();
   }, []);
 
-  const reset = () => {
-    _fetch('/score', 'DELETE');
+  const reset = async () => {
+    await _fetch('/score', 'DELETE');
     discoveries.reset();
   };
 
