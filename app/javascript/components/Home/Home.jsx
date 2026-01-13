@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@stylesheets/Home.module.css';
 import waldoImage from '@images/waldo.png';
 import { mapPreviews } from '@javascript/mapImages';
-import { ScoresIcon, PlayIcon } from '../Icons/Icons';
+import { ScoresIcon, PlayIcon } from '@javascript/components/Icons/Icons';
 
 export default function Home({ maps }) {
   return (
