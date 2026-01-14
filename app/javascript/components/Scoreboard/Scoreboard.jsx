@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '@stylesheets/Scoreboard.module.css';
-import { mapImages } from '../../mapImages';
+import { mapImages } from '@javascript/mapImages';
 
 const pageLimit = 25;
 
@@ -51,7 +51,7 @@ export default function Scoreboard({ map, personalBest, initialPage }) {
                     type="number"
                     min="1"
                     max={pageCount}
-                    value={page}
+                    defaultValue={page}
                     onChange={updatePage}
                   />{' '}
                 </span>
@@ -71,7 +71,7 @@ export default function Scoreboard({ map, personalBest, initialPage }) {
                     <th>Score</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-testid="table-body">
                   {scoresPerPage.map((score, index) => (
                     <tr key={index}>
                       <td>{score.pos}</td>
