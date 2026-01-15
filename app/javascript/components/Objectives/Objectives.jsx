@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { SuccessIcon } from '../Icons/Icons';
 import styles from '@stylesheets/Objectives.module.css';
+import { SuccessIcon } from '@javascript/components/Icons/Icons';
 
 const TriggerButton = ({ itemType, ref }) => {
   const onClick = (event) => {
