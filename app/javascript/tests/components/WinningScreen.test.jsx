@@ -75,9 +75,9 @@ test('renders final score', async () => {
   });
 
   expect(
-    await screen.getByText(/you've cleared the map with a score of/i)
+    screen.getByText(/you've cleared the map with a score of/i)
   ).toBeInTheDocument();
-  expect(await screen.getByText(/900\.24/i)).toBeInTheDocument();
+  expect(screen.getByText(/900\.24/i)).toBeInTheDocument();
 });
 
 test('renders navigation buttons', async () => {
@@ -90,10 +90,8 @@ test('renders navigation buttons', async () => {
   expect(
     await screen.findByRole('button', { name: /replay/i })
   ).toBeInTheDocument();
-  expect(await screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
-  expect(
-    await screen.getByRole('link', { name: /map scores/i })
-  ).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /map scores/i })).toBeInTheDocument();
 });
 
 describe('when clicking replay button', () => {
@@ -106,11 +104,11 @@ describe('when clicking replay button', () => {
       );
     });
 
-    const replayButton = await screen.findByRole('button', { name: /replay/i });
+    const replayButton = screen.getByRole('button', { name: /replay/i });
     await user.click(replayButton);
 
     expect(fetchMock).toHaveBeenLastCalledWith('/score', 'DELETE');
-    expect(discoveriesResetMock).toHaveBeenCalled(1);
+    expect(discoveriesResetMock).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -170,12 +168,10 @@ describe('when user is signed out', () => {
       );
     });
 
-    const input = await screen.getByRole('textbox', {
+    const input = screen.getByRole('textbox', {
       name: /enter your name to save your result/i,
     });
-    const submitButton = await screen.getByRole('button', {
-      name: /create user/i,
-    });
+    const submitButton = screen.getByRole('button', { name: /create user/i });
     const form = submitButton.form;
 
     expect(input).toBeInTheDocument();

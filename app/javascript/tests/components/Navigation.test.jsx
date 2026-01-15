@@ -15,12 +15,10 @@ vi.spyOn(document, 'querySelector').mockReturnValue({ content: '' });
 afterEach(() => vi.clearAllMocks());
 afterAll(() => (window.document.querySelector = originalQuerySelector));
 
-test('renders navigation button', async () => {
+test('renders navigation button', () => {
   render(<Navigation />);
 
-  const button = await screen.getByRole('button', {
-    name: /open navigation menu/i,
-  });
+  const button = screen.getByRole('button', { name: /open navigation menu/i });
 
   expect(button).toBeInTheDocument();
 });
@@ -30,8 +28,8 @@ test('opens and closes menu when navigation button is clicked', async () => {
 
   render(<Navigation />);
 
-  const navigation = await screen.getByRole('navigation');
-  const button = await screen.getByRole('button', {
+  const navigation = screen.getByRole('navigation');
+  const button = screen.getByRole('button', {
     name: /open navigation menu/i,
   });
 
@@ -48,7 +46,7 @@ test('opens and closes menu when navigation button is clicked', async () => {
   expect(navigation).not.toHaveClass(styles.extended);
 });
 
-test('renders links', async () => {
+test('renders links', () => {
   const links = [
     { url: '/', content: 'Home' },
     { url: '/user', content: <p>Hello User</p> },
@@ -56,11 +54,9 @@ test('renders links', async () => {
 
   render(<Navigation links={links} />);
 
-  const navigation = await screen.getByRole('navigation');
-  const homeLink = await within(navigation).getByRole('link', {
-    name: /home/i,
-  });
-  const paraLink = await within(navigation).getByRole('link', {
+  const navigation = screen.getByRole('navigation');
+  const homeLink = within(navigation).getByRole('link', { name: /home/i });
+  const paraLink = within(navigation).getByRole('link', {
     name: /hello user/i,
   });
 
@@ -72,13 +68,13 @@ test('renders links', async () => {
 });
 
 describe('when links have no url property', () => {
-  test('renders elements', async () => {
+  test('renders elements', () => {
     const MyButton = ({ text }) => <button>{text}</button>;
 
     render(<Navigation links={[{ content: <MyButton text="Click Me" /> }]} />);
 
-    const navigation = await screen.getByRole('navigation');
-    const button = await within(navigation).getByRole('button', {
+    const navigation = screen.getByRole('navigation');
+    const button = within(navigation).getByRole('button', {
       name: /click me/i,
     });
 
@@ -89,15 +85,13 @@ describe('when links have no url property', () => {
 describe('when user is signed out', () => {
   beforeAll(() => useContent.mockReturnValue({ currentUser: null }));
 
-  test('renders sign in form', async () => {
+  test('renders sign in form', () => {
     render(<Navigation />);
 
-    const navigation = await screen.getByRole('navigation');
-    const message = await within(navigation).getByText(/not signed in/i);
-    const input = await within(navigation).getByRole('textbox');
-    const button = await within(navigation).getByRole('button', {
-      name: /sign in/i,
-    });
+    const navigation = screen.getByRole('navigation');
+    const message = within(navigation).getByText(/not signed in/i);
+    const input = within(navigation).getByRole('textbox');
+    const button = within(navigation).getByRole('button', { name: /sign in/i });
     const form = button.form;
 
     expect(message).toBeInTheDocument();
@@ -115,15 +109,13 @@ describe('when user is signed in', () => {
     useContent.mockReturnValue({ currentUser: { name: 'testUser', id: 1 } })
   );
 
-  test('renders sign out form', async () => {
+  test('renders sign out form', () => {
     render(<Navigation />);
 
-    const navigation = await screen.getByRole('navigation');
-    const message = await within(navigation).getByText(/signed in as/i);
-    const link = await within(navigation).getByRole('link', {
-      name: /testuser/i,
-    });
-    const button = await within(navigation).getByRole('button', {
+    const navigation = screen.getByRole('navigation');
+    const message = within(navigation).getByText(/signed in as/i);
+    const link = within(navigation).getByRole('link', { name: /testuser/i });
+    const button = within(navigation).getByRole('button', {
       name: /sign out/i,
     });
     const form = button.form;
