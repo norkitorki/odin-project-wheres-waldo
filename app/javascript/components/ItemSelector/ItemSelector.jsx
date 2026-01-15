@@ -6,11 +6,11 @@ export default function ItemSelector({ findables, discoveries, onClick, ref }) {
     onClick(event, event.target.dataset['itemIndex']);
   };
 
-  let characters = [];
-  let items = [];
+  const characters = [];
+  const items = [];
 
   findables.forEach((findable, index) => {
-    let arr = index < 5 ? characters : items;
+    let arr = findable.type_of === 'item' ? items : characters;
     if (discoveries.toArray[index]) {
       arr.push(null);
     } else {
@@ -31,24 +31,6 @@ export default function ItemSelector({ findables, discoveries, onClick, ref }) {
     }
   });
 
-  /*
-  const displayedItems = findables.map((item, index) =>
-    discoveries.toArray[index] ? null : (
-      <button
-        key={item.name}
-        className={styles.button}
-        data-item-index={index}
-        title={item.name}
-      >
-        <img
-          src={item.image}
-          alt={`${item.name} portrait`}
-          data-item-index={index}
-        />
-      </button>
-    )
-  );
-  */
   return (
     <div className={styles.container} onClick={clickCallback} ref={ref}>
       <div className={styles.characters}>{characters}</div>
