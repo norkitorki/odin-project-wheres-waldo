@@ -1,8 +1,8 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '@javascript/components/Navigation/Navigation';
 import styles from '@stylesheets/UserHome.module.css';
-import { Form, SubmitButton } from '../Inputs';
-import { mapPreviews } from '../../mapImages';
+import { Form, SubmitButton } from '@javascript/components/Inputs';
+import { mapPreviews } from '@javascript/mapImages';
 
 export default function UserHome({ user, scores, deleteForm }) {
   const newUser = new URLSearchParams(location.search).get('new_user');
