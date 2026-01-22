@@ -17,10 +17,9 @@ vi.mock('@javascript/utils.js', () => ({ _fetch: fetchMock }));
 
 let responseObject;
 const fetchMock = vi.hoisted(() => vi.fn(() => responseObject));
-const discoveriesResetMock = vi.hoisted(() => vi.fn());
 const props = {
   map: { id: 1, name: 'Waldo Dreamland' },
-  discoveries: { reset: discoveriesResetMock },
+  discoveries: { reset: vi.fn() },
   newUser: {
     form: {
       inputs: {
@@ -103,7 +102,7 @@ describe('when clicking replay button', () => {
     await user.click(replayButton);
 
     expect(fetchMock).toHaveBeenLastCalledWith('/score', 'DELETE');
-    expect(discoveriesResetMock).toHaveBeenCalledTimes(1);
+    expect(props.discoveries.reset).toHaveBeenCalledTimes(1);
   });
 });
 
