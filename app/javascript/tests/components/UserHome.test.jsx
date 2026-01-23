@@ -1,6 +1,6 @@
 import React from 'react';
 import UserHome from '@javascript/components/UserHome/UserHome';
-import { afterAll, expect, test, vi } from 'vitest';
+import { afterAll, beforeAll, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -140,4 +140,35 @@ test('copies user token to clipboard', async () => {
   expect(alertSpy).toHaveBeenCalledWith(
     'User token has been copied to your clipboard',
   );
+});
+
+describe('when new_user query parameter is unset', () => {
+  test('omits token warning message', () => {
+    render(<UserHome {...props} />);
+
+    expect(
+      screen.queryByText(
+        /please backup your user token before terminating the current session\. without the token, you won't be able to recover your account in the future\./i,
+      ),
+    ).not.toBeInTheDocument();
+  });
+});
+
+describe('when new_user query parameter is set', () => {
+  const originalLocation = window.location;
+
+  beforeAll(
+    () => (window.location = { ...originalLocation, search: '?new_user=true' }),
+  );
+  afterAll(() => (window.location = originalLocation));
+
+  test('renders token warning message', () => {
+    render(<UserHome {...props} />);
+
+    expect(
+      screen.getByText(
+        /please backup your user token before terminating the current session\. without the token, you won't be able to recover your account in the future\./i,
+      ),
+    ).toBeInTheDocument();
+  });
 });
