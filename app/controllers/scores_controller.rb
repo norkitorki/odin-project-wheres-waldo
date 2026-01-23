@@ -43,6 +43,7 @@ class ScoresController < ApplicationController
 
   def destroy
     session[:game][:findables][:found] = 9
+    session[:game][:score][:value] = nil
     session[:game][:score][:start] = Time.now.to_f
 
     render plain: "Score deleted"

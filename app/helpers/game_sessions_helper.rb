@@ -6,7 +6,7 @@ module GameSessionsHelper
 
     session[:game] = {
       map: @map,
-      findables: { count: @findables&.length || @map.findables.count, found: 9 },
+      findables: { count: @findables&.length || @map.findables.count, found: 0 },
       score: { start: Time.now.to_f }
     }
   end
