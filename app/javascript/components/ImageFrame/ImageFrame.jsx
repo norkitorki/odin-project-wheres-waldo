@@ -1,29 +1,29 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styles from '@stylesheets/ImageFrame.module.css';
-import ItemSelector from '../ItemSelector/ItemSelector';
-import Objectives from '../Objectives/Objectives';
-import MessageBoard from '../MessageBoard/MessageBoard';
-import WinningScreen from '../WinningScreen/WinningScreen';
-import Navigation from '../Navigation/Navigation';
-import { sendMessage } from '../MessageBoard/MessageBoardHelper';
+import ItemSelector from '@javascript/components/ItemSelector/ItemSelector';
+import Objectives from '@javascript/components/Objectives/Objectives';
+import MessageBoard from '@javascript/components/MessageBoard/MessageBoard';
+import WinningScreen from '@javascript/components/WinningScreen/WinningScreen';
+import Navigation from '@javascript/components/Navigation/Navigation';
+import { sendMessage } from '@javascript/components/MessageBoard/MessageBoardHelper';
+import { _fetch } from '@javascript/utils';
 import {
   constructMessage,
   fetchItem,
   findCoordinates,
   missedClick,
   setMarker,
-} from './ImageFrameHelper';
-import { _fetch } from '@javascript/utils';
+} from '@javascript/components/ImageFrame/ImageFrameHelper';
 
 export default function ImageFrame({ map, findables, image, newUser }) {
   const [discoveries, setDiscoveries] = useState({
-    count: 9,
+    count: 0,
     toArray: Array(findables.length),
     reset: function () {
       document.querySelectorAll('.itemMarker').forEach((el) => el.remove());
       setDiscoveries({
         ...discoveries,
-        count: 9,
+        count: 0,
         toArray: Array(findables.length),
       });
     },
@@ -34,7 +34,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
       _fetch('/game_sessions', 'DELETE');
       discoveries.reset();
     },
-    []
+    [],
   );
 
   const imageRef = useRef();
@@ -50,7 +50,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
     if (event.screenX > 0 && event.screenY > 0) {
       scroll(
         dragEvent.clientX - event.clientX,
-        dragEvent.clientY - event.clientY
+        dragEvent.clientY - event.clientY,
       );
     }
   };
@@ -60,12 +60,12 @@ export default function ImageFrame({ map, findables, image, newUser }) {
 
     contextMenuRef.current?.setAttribute(
       'style',
-      `display: flex; left: ${pageX + 7.5}px; top: ${pageY + 7.5}px;`
+      `display: flex; left: ${pageX + 7.5}px; top: ${pageY + 7.5}px;`,
     );
 
     cirlceRef.current?.setAttribute(
       'style',
-      `display: block; left: ${pageX - 10.83}px ;top: ${pageY - 10.83}px;`
+      `display: block; left: ${pageX - 10.83}px ; top: ${pageY - 10.83}px;`,
     );
 
     coordinates = findCoordinates(event, imageRef.current, findables);
@@ -80,7 +80,6 @@ export default function ImageFrame({ map, findables, image, newUser }) {
 
     if (clickedItem?.name === item.name) {
       setMarker(cirlceRef.current, item, itemModalRef.current);
-
       setDiscoveries((state) => {
         const newState = { ...state };
         newState.count++;
@@ -94,9 +93,9 @@ export default function ImageFrame({ map, findables, image, newUser }) {
     sendMessage(
       constructMessage(
         item,
-        `${item.name} ${clickedItem?.name === item.name ? '' : 'not'} found!`
+        `${item.name} ${clickedItem?.name === item.name ? '' : 'not'} found!`,
       ),
-      5
+      5,
     );
   };
 
@@ -113,6 +112,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
           },
         ]}
       />
+      <MessageBoard />
       <img
         src={image}
         className={styles.image}
@@ -122,6 +122,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
         onDrag={onDrag}
         onDragStart={onDragStart}
         ref={imageRef}
+        data-testid="main-image"
       />
       {discoveries.count < discoveries.toArray.length ? (
         <>
@@ -129,6 +130,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
             className={styles.targetCircle}
             onClick={onClick}
             ref={cirlceRef}
+            data-testid="target-circle"
           />
           <ItemSelector
             findables={findables}
@@ -141,7 +143,6 @@ export default function ImageFrame({ map, findables, image, newUser }) {
         <WinningScreen map={map} discoveries={discoveries} newUser={newUser} />
       )}
       <div className={styles.modal} ref={itemModalRef} />
-      <MessageBoard />
     </>
   );
 }
