@@ -1,24 +1,22 @@
-# README
+# Odin Project: Where's Waldo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A [Where's Waldo](https://en.wikipedia.org/wiki/Where%27s_Wally%3F) puzzle game implementation written in Javascript/Rails.
 
-Things you may want to cover:
+Try to find every iconic character across several iconic locations and publish your high scores!
 
-* Ruby version
+## Dependencies
 
-* System dependencies
+- [Ruby](https://www.ruby-lang.org/en/)
+- [NodeJS](https://nodejs.org/en)
 
-* Configuration
+## Run Locally
 
-* Database creation
+```
+git clone https://github.com/norkitorki/odin-project-wheres-waldo.git &&
+cd odin-project-wheres-waldo &&
+bundle install &&
+npm install &&
+bin/dev
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open your preferred web browser and visit http://127.0.0.1:3000/ to use the application
