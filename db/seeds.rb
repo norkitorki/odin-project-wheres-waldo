@@ -4,7 +4,8 @@ Findable.destroy_all
 Map.destroy_all
 
 begin
-  data = SecretKeys.new("db/seeds/data.yaml", Rails.application.credentials.fetch(:data_seeds_key))
+  key = "PyL79xWPl8Jr1c8X709oepQFfJ2ULZiQNVqKoxFojBEtJ3gb7d2EQq2sGbrfjAtC2BmnlQlbqMQf9riQGThvuwkaU1dbdRoXLdFeDuupbxgo5Y28d5nspAhRbcKmlj6e"
+  data = SecretKeys.new("db/seeds/data.yaml", key)
 rescue
   puts "Unable to find secret key or to decrypt data.yaml"
   return
