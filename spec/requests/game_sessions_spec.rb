@@ -13,7 +13,7 @@ RSpec.describe "GameSessions", type: :request do
 
       expect(session[:game]).to match({
         map: map,
-        findables: { count: map.findables.count, found: 9 },
+        findables: { count: map.findables.count, found: 0 },
         score: { start: an_instance_of(Float) }
       })
     end

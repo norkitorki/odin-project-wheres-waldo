@@ -17,7 +17,7 @@ RSpec.describe "Maps", type: :request do
       expect(assigns[:new_user]).to be_a(User)
       expect(session[:game]).to match({
         map: map,
-        findables: { count: findables.length, found: 9 },
+        findables: { count: findables.length, found: 0 },
         score: { start: an_instance_of(Float) }
       })
     end
