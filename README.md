@@ -16,6 +16,7 @@ git clone https://github.com/norkitorki/odin-project-wheres-waldo.git &&
 cd odin-project-wheres-waldo &&
 bundle install &&
 npm install &&
+bin/rails db:setup &&
 bin/dev
 ```
 
