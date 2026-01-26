@@ -71,3 +71,4 @@ end
 gem "superglue"
 gem "vite_rails"
 gem "activerecord-session_store"
+gem "secret_keys", "~> 1.0", ">= 1.0.2"
