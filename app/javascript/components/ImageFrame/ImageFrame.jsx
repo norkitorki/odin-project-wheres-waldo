@@ -7,6 +7,7 @@ import WinningScreen from '@javascript/components/WinningScreen/WinningScreen';
 import Navigation from '@javascript/components/Navigation/Navigation';
 import { sendMessage } from '@javascript/components/MessageBoard/MessageBoardHelper';
 import { _fetch } from '@javascript/utils';
+import { primaryInput } from 'detect-it';
 import {
   constructMessage,
   fetchItem,
@@ -42,18 +43,34 @@ export default function ImageFrame({ map, findables, image, newUser }) {
   const contextMenuRef = useRef();
   const itemModalRef = useRef();
 
-  let coordinates, dragEvent;
+  let coordinates, onMouseDown, onMouseUp, onMouseMove;
+  let startCoords = {};
+  let dragging = false;
 
-  const onDragStart = (event) => (dragEvent = event);
+  if (primaryInput === 'mouse') {
+    onMouseDown = (event) => {
+      if (event.button !== 1) return;
 
-  const onDrag = (event) => {
-    if (event.screenX > 0 && event.screenY > 0) {
-      scroll(
-        dragEvent.clientX - event.clientX,
-        dragEvent.clientY - event.clientY,
-      );
-    }
-  };
+      dragging = true;
+      contextMenuRef.current.style.display = 'none';
+      cirlceRef.current.style.display = 'none';
+      imageRef.current?.classList.add(styles.dragging);
+      startCoords = { x: event.clientX, y: event.clientY };
+    };
+
+    onMouseUp = (event) => {
+      if (event.button !== 1) return;
+
+      dragging = false;
+      imageRef.current?.classList.remove(styles.dragging);
+    };
+
+    onMouseMove = (event) => {
+      if (dragging) {
+        scrollBy(startCoords.x - event.clientX, startCoords.y - event.clientY);
+      }
+    };
+  }
 
   const onClick = (event) => {
     const { pageX, pageY } = event;
@@ -119,11 +136,13 @@ export default function ImageFrame({ map, findables, image, newUser }) {
         onClick={
           discoveries.count >= discoveries.toArray.length ? null : onClick
         }
-        onDrag={onDrag}
-        onDragStart={onDragStart}
+        onMouseMove={onMouseMove}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
         ref={imageRef}
         data-testid="main-image"
       />
+
       {discoveries.count < discoveries.toArray.length ? (
         <>
           <div

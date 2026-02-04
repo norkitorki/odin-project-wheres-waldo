@@ -28,7 +28,7 @@ export const setMarker = (targetCircle, item, modal) => {
   marker.setAttribute('style', targetCircle.getAttribute('style'));
   marker.addEventListener('mouseenter', (event) => {
     marker.addEventListener('mouseout', () => (modal.style.display = 'none'));
-    modal.textContent = `${item.name} was found here`;
+    modal.textContent = `${item.name} (${item.type_of})`;
     modal.style.display = 'block';
     modal.style.left = `${event.pageX + 5}px`;
     modal.style.top = `${event.pageY + 5}px`;

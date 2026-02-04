@@ -2,6 +2,11 @@
   z-index: 0;
   display: block;
   margin: 0 auto;
+  user-select: none;
+}
+
+.dragging {
+  cursor: grabbing;
 }
 
 .targetCircle {
