@@ -67,7 +67,10 @@ export default function ImageFrame({ map, findables, image, newUser }) {
 
     onMouseMove = (event) => {
       if (dragging) {
-        scrollBy(startCoords.x - event.clientX, startCoords.y - event.clientY);
+        scrollBy(
+          (startCoords.x - event.clientX) / 30,
+          (startCoords.y - event.clientY) / 30,
+        );
       }
     };
   }
