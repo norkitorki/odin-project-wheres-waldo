@@ -8,6 +8,7 @@ Try to find every iconic character across several iconic locations and publish y
 
 - [Ruby](https://www.ruby-lang.org/en/)
 - [NodeJS](https://nodejs.org/en)
+- [PostgreSQL](https://www.postgresql.org/) (as database store)
 
 ## Run Locally
 
