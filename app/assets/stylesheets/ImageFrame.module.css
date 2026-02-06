@@ -41,7 +41,6 @@
   composes: container from './ItemSelector.module.css';
   font-weight: bold;
   padding: 1rem;
-  z-index: 1000;
 }
 
 .message {

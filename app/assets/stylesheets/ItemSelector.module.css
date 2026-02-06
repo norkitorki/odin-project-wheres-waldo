@@ -6,8 +6,8 @@
   background-color: #2e2a2aec;
   outline: 1px solid #59eea9;
   padding: 0.5rem;
-  border-radius: 0 12px 12px 12px;
-  transition: all 0.2s ease-in-out;
+  border-radius: 12px;
+  transition: all 0.2s ease-in;
   z-index: 1000;
 }
 

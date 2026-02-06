@@ -8,6 +8,7 @@ import Navigation from '@javascript/components/Navigation/Navigation';
 import { sendMessage } from '@javascript/components/MessageBoard/MessageBoardHelper';
 import { _fetch } from '@javascript/utils';
 import { primaryInput } from 'detect-it';
+import { preventSelectorOverflow } from '../ItemSelector/ItemSelectorHelper';
 import {
   constructMessage,
   fetchItem,
@@ -88,6 +89,7 @@ export default function ImageFrame({ map, findables, image, newUser }) {
       `display: block; left: ${pageX - 10.83}px ; top: ${pageY - 10.83}px;`,
     );
 
+    preventSelectorOverflow(contextMenuRef.current);
     coordinates = findCoordinates(event, imageRef.current, findables);
   };
 
@@ -139,9 +141,9 @@ export default function ImageFrame({ map, findables, image, newUser }) {
         onClick={
           discoveries.count >= discoveries.toArray.length ? null : onClick
         }
-        onMouseMove={onMouseMove}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
+        onMouseMove={onMouseMove}
         ref={imageRef}
         data-testid="main-image"
       />
