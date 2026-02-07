@@ -39,8 +39,10 @@
 
 .modal {
   composes: container from './ItemSelector.module.css';
+  font-size: 0.9rem;
   font-weight: bold;
   padding: 1rem;
+  transition: none;
 }
 
 .message {

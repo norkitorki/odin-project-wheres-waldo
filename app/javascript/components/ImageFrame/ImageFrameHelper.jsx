@@ -26,12 +26,13 @@ export const setMarker = (targetCircle, item, modal) => {
   const marker = targetCircle.cloneNode(true);
   marker.classList.value = `${styles.itemMarker} itemMarker`;
   marker.setAttribute('style', targetCircle.getAttribute('style'));
+
   marker.addEventListener('mouseenter', (event) => {
     marker.addEventListener('mouseout', () => (modal.style.display = 'none'));
     modal.textContent = `${item.name} (${item.type_of})`;
     modal.style.display = 'block';
-    modal.style.left = `${event.pageX + 5}px`;
-    modal.style.top = `${event.pageY + 5}px`;
+    modal.style.left = `${event.pageX - 75}px`;
+    modal.style.top = `${event.pageY - 37}px`;
   });
 
   document.body.appendChild(marker);
