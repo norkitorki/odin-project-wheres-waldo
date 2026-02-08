@@ -29,7 +29,7 @@ MAPS.each do |map|
   new_map = Map.create!(name: map["name"])
   if new_map
     create_or_assign_findables(new_map, :character, map["characters"])
-    create_or_assign_findables(new_map, :item,  map["items"])
+    create_or_assign_findables(new_map, :item, map["items"])
     puts "  #{new_map.name} data imported."
   end
 end
