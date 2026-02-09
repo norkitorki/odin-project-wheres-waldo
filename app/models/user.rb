@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  validate :name_cannot_be_anon
   validates :name, presence: true, uniqueness: true
 
   before_create :generate_token
@@ -10,6 +11,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def name_cannot_be_anon
+    errors.add(:name, "can't be a reserved value") if name.match(/\Aanon\z/i)
+  end
 
   def generate_token
     begin

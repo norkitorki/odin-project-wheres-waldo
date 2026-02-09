@@ -11,11 +11,13 @@ class UsersController < ApplicationController
   end
 
   def create
+    return create_anonymous_score if params[:anonymous]
+
     @user = User.new(user_params)
 
     if @user.save
       session[:user] = @user
-      @user.scores.create(session[:game][:score].merge({ map_id: @map[:id] }).except(:start)) if in_game?
+      create_user_score
       redirect_to "/user?new_user=true"
     else
       @findables = Map.find(@map[:id]).findables
@@ -41,5 +43,15 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name)
+  end
+
+  def create_user_score
+    @user.scores.create(session[:game][:score].merge({ map_id: @map[:id] }).except(:start)) if in_game?
+  end
+
+  def create_anonymous_score
+    @user = User.find_by(name: "Anon")
+    create_user_score
+    redirect_to scoreboard_path(@map)
   end
 end

@@ -28,7 +28,7 @@ export default function WinningScreen({ map, discoveries, newUser }) {
       await _fetch(
         `/scores?map_id=${map.id}&page=1&per_page=10`,
         'GET',
-        (rankings) => setRankings(rankings)
+        (rankings) => setRankings(rankings),
       );
 
       setScore(score);
@@ -61,33 +61,50 @@ export default function WinningScreen({ map, discoveries, newUser }) {
           )}
         </p>
         {newUser ? (
-          <Form
-            {...newUser.form.form}
-            extras={newUser.form.extras}
-            validationErrors={newUser.form.errors}
-            className={styles.form}
-            data-sg-visit
-          >
-            <TextField
-              {...newUser.form.inputs.name}
-              label={'Enter your name to save your result'}
-              placeholder={'Your Name Here'}
-              ref={inputRef}
-              autoFocus
-            />
-            <SubmitButton
-              {...newUser.form.inputs.submit}
-              type="submit"
-              className={styles.submitButton}
-            />
-            {newUser.formErrors && (
-              <div className={styles.formErrors}>
-                {newUser.formErrors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
-          </Form>
+          <>
+            <Form
+              {...newUser.form.form}
+              extras={newUser.form.extras}
+              validationErrors={newUser.form.errors}
+              className={styles.form}
+              data-sg-visit
+            >
+              <TextField
+                {...newUser.form.inputs.name}
+                label={'Create an account to save your result'}
+                placeholder={'Your Name Here'}
+                ref={inputRef}
+                autoFocus
+              />
+              <SubmitButton
+                {...newUser.form.inputs.submit}
+                type="submit"
+                className={styles.submitButton}
+              />
+              {newUser.formErrors && (
+                <div className={styles.formErrors}>
+                  {newUser.formErrors.map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
+            </Form>
+            <Form
+              {...newUser.form.form}
+              extras={newUser.form.extras}
+              className={styles.form}
+              data-sg-visit
+            >
+              <input type="hidden" name="anonymous" />
+              <button
+                type="submit"
+                className={styles.anonSubmit}
+                title="submit your score anonymously on the scoreboards"
+              >
+                Submit Anonymous Score
+              </button>
+            </Form>
+          </>
         ) : (
           <>
             <table className={styles.rankings}>

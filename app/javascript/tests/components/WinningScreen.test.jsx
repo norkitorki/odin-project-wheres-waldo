@@ -111,12 +111,23 @@ describe('when user is signed out', () => {
     await act(() => render(<WinningScreen {...props} />));
 
     const input = screen.getByRole('textbox', {
-      name: /enter your name to save your result/i,
+      name: /create an account to save your result/i,
     });
     const submitButton = screen.getByRole('button', { name: /create user/i });
     const form = submitButton.form;
 
     expect(input).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
+    expect(form.action).toMatch(/\users$/i);
+    expect(form.method).toBe('post');
+  });
+
+  test('renders anonymous user form', async () => {
+    await act(() => render(<WinningScreen {...props} />));
+
+    const submitButton = screen.getByRole('button', { name: /submit anonymous score/i });
+    const form = submitButton.form;
+
     expect(submitButton).toBeInTheDocument();
     expect(form.action).toMatch(/\users$/i);
     expect(form.method).toBe('post');

@@ -15,6 +15,7 @@
   font-size: 2rem;
   text-align: center;
   z-index: 1000;
+  overflow: auto;
 }
 
 .container > h2 {
@@ -75,10 +76,20 @@
   border-radius: 0 8px 8px 0;
 }
 
+.anonSubmit {
+  composes: button;
+  font-size: 1.2rem;
+  background: #8a0808;
+}
 .button:hover,
 .button:focus {
   background: #59eea844;
   outline: 2px solid #59eea8;
+}
+
+.anonSubmit:hover,
+.anonSubmit:focus {
+  background: #8a0808;
 }
 
 .formErrors {

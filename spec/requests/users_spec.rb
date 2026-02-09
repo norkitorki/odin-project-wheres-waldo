@@ -48,6 +48,22 @@ RSpec.describe "Users", type: :request do
       expect(response).to render_template("maps/show")
       expect(flash[:user_errors].first).to eql("Name can't be blank")
     end
+
+    context "when anonymous parameter is passed" do
+      it "should create anonymous score" do
+        session_hash[:game] = {
+          map: maps.first,
+          score: { value: 877.4 }
+        }
+
+        expect { post users_path, params: { anonymous: true } }
+          .to change { User.count }.by(0)
+          .and change { Score.count }.by(1)
+
+        expect(response).to redirect_to("/scoreboard/#{session_hash[:game][:map].id}")
+        expect(session[:user]).to be_nil
+      end
+    end
   end
 
   describe "DELETE /user" do
