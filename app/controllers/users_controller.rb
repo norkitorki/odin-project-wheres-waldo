@@ -50,7 +50,9 @@ class UsersController < ApplicationController
   end
 
   def create_anonymous_score
-    @user = User.find_by(name: "Anon")
+    @user = User.find_by(name: "Anon") || User.new(name: "Anon")
+    @user.save(validate: false) if @user.new_record?
+
     create_user_score
     redirect_to scoreboard_path(@map)
   end

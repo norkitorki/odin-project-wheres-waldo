@@ -25,8 +25,6 @@ end
 
 puts "Importing application data..."
 
-User.new(name: 'Anon').save(validate: false)
-
 MAPS.each do |map|
   new_map = Map.create!(name: map["name"])
   if new_map

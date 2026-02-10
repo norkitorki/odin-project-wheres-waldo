@@ -50,18 +50,38 @@ RSpec.describe "Users", type: :request do
     end
 
     context "when anonymous parameter is passed" do
-      it "should create anonymous score" do
-        session_hash[:game] = {
-          map: maps.first,
-          score: { value: 877.4 }
-        }
+      context "when 'Anon' user exists" do
+        it "should create anonymous score" do
+          session_hash[:game] = {
+            map: maps.first,
+            score: { value: 877.4 }
+          }
 
-        expect { post users_path, params: { anonymous: true } }
-          .to change { User.count }.by(0)
-          .and change { Score.count }.by(1)
+          expect { post users_path, params: { anonymous: true } }
+            .to change { User.count }.by(0)
+            .and change { Score.count }.by(1)
 
-        expect(response).to redirect_to("/scoreboard/#{session_hash[:game][:map].id}")
-        expect(session[:user]).to be_nil
+          expect(response).to redirect_to("/scoreboard/#{session_hash[:game][:map].id}")
+          expect(session[:user]).to be_nil
+        end
+      end
+
+      context "when 'Anon' user doesn't exist" do
+        before(:each) { User.destroy_all }
+
+        it "should create user and score" do
+          session_hash[:game] = {
+            map: maps.first,
+            score: { value: 877.4 }
+          }
+
+          expect { post users_path, params: { anonymous: true } }
+            .to change { User.count }.by(1)
+            .and change { Score.count }.by(1)
+
+          expect(response).to redirect_to("/scoreboard/#{session_hash[:game][:map].id}")
+          expect(session[:user]).to be_nil
+        end
       end
     end
   end
