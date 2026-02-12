@@ -192,4 +192,30 @@ RSpec.describe "Scores", type: :request do
       end
     end
   end
+
+  describe "DELETE /score" do
+    include_context 'session double'
+
+    let(:session_state) do
+      {
+        game: {
+          score: { start: Time.now.to_f - 100, value: 960.0 },
+          findables: { count: 5, found: 5 }
+        }
+      }
+    end
+
+    it "should reset score session state" do
+      session_state.each { |k, v| session_hash[k] = v }
+      score_start = session_hash[:game][:score][:start]
+      delete score_path
+
+      expect(response.body).to eql("Score deleted")
+      expect(session[:game]).to match({
+        score: { start: an_instance_of(Float), value: nil },
+        findables: { count: 5, found: 0 }
+      })
+      expect(session[:game][:score][:start]).to be > score_start
+    end
+  end
 end
