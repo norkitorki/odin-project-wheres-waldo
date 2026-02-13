@@ -2,25 +2,19 @@ import React, { useRef } from 'react';
 import styles from '@stylesheets/Objectives.module.css';
 import { SuccessIcon } from '@javascript/components/Icons/Icons';
 
-const TriggerButton = ({ itemType, ref }) => {
-  const onClick = (event) => {
-    const trigger = event.target;
-    const toggle = ref.current?.classList.toggle(styles.objectivesShown);
-    const status = toggle ? 'Hide' : 'Show';
-
-    trigger.classList.toggle(styles.active);
-    trigger.textContent = `${status} ${itemType}`;
-    trigger.title = `${status} current ${itemType}`;
+const TriggerButton = ({ itemType, activeRef, inactiveRef }) => {
+  const onClick = () => {
+    inactiveRef.current?.classList.remove(styles.objectivesShown);
+    activeRef.current?.classList.toggle(styles.objectivesShown);
   };
 
   return (
     <button
       className={styles.trigger}
+      title={`Toggle findable ${itemType}`}
       onClick={onClick}
-      data-type={itemType}
-      title={`Show findable ${itemType}`}
     >
-      Show {itemType}
+      Toggle {itemType}
     </button>
   );
 };
@@ -46,7 +40,7 @@ export default function Objectives({ findables, discoveries }) {
   const items = [];
 
   findables.forEach((f, index) =>
-    f.type_of === 'item' ? items.push([f, index]) : characters.push([f, index])
+    f.type_of === 'item' ? items.push([f, index]) : characters.push([f, index]),
   );
 
   const charactersToRender = listItems(characters, discoveries);
@@ -54,8 +48,16 @@ export default function Objectives({ findables, discoveries }) {
 
   return (
     <>
-      <TriggerButton itemType="Characters" ref={charactersRef} />
-      <TriggerButton itemType="Items" ref={itemsRef} />
+      <TriggerButton
+        itemType="Characters"
+        activeRef={charactersRef}
+        inactiveRef={itemsRef}
+      />
+      <TriggerButton
+        itemType="Items"
+        activeRef={itemsRef}
+        inactiveRef={charactersRef}
+      />
       <div className={styles.objectives} ref={charactersRef}>
         <ul>{charactersToRender}</ul>
       </div>
