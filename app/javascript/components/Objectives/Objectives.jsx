@@ -58,10 +58,18 @@ export default function Objectives({ findables, discoveries }) {
         activeRef={itemsRef}
         inactiveRef={charactersRef}
       />
-      <div className={styles.objectives} ref={charactersRef}>
+      <div
+        className={styles.objectives}
+        ref={charactersRef}
+        data-testid="character-objectives"
+      >
         <ul>{charactersToRender}</ul>
       </div>
-      <div className={styles.objectives} ref={itemsRef}>
+      <div
+        className={styles.objectives}
+        ref={itemsRef}
+        data-testid="item-objectives"
+      >
         <ul>{itemsToRender}</ul>
       </div>
     </>

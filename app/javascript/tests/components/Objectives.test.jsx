@@ -16,8 +16,6 @@ const findables = [
   { name: 'Key', type_of: 'item', image: <img alt="Key image" /> },
 ];
 
-const discoveries = { count: 1, toArray: [true, null, null, null] };
-
 const props = {
   findables: [
     { name: 'Waldo', type_of: 'character', image: <img alt="Waldo image" /> },
@@ -31,8 +29,8 @@ const props = {
 test('renders toggle buttons', () => {
   render(<Objectives {...props} />);
 
-  screen.getByRole('button', { name: /show characters/i });
-  screen.getByRole('button', { name: /show items/i });
+  screen.getByRole('button', { name: /toggle characters/i });
+  screen.getByRole('button', { name: /toggle items/i });
 });
 
 test('renders characters and items', () => {
@@ -63,21 +61,64 @@ test('renders success icon on uncovered findables', () => {
   expect(wendaIcon).not.toBeInTheDocument();
 });
 
-test('toggles objectives on button click', async () => {
+test('toggles characters on button click', async () => {
   const user = userEvent.setup();
 
   render(<Objectives {...props} />);
 
   const charactersBtn = screen.getByRole('button', {
-    name: /show characters/i,
+    name: /toggle characters/i,
   });
-  const itemsBtn = screen.getByRole('button', { name: /show items/i });
+  const objectives = screen.getByTestId('character-objectives');
 
   await user.click(charactersBtn);
+
+  expect(objectives).toHaveClass(styles.objectivesShown);
+
+  await user.click(charactersBtn);
+
+  expect(objectives).not.toHaveClass(styles.objectivesShown);
+});
+
+test('toggles items on button click', async () => {
+  const user = userEvent.setup();
+
+  render(<Objectives {...props} />);
+
+  const itemsBtn = screen.getByRole('button', {
+    name: /toggle items/i,
+  });
+  const objectives = screen.getByTestId('item-objectives');
+
   await user.click(itemsBtn);
 
-  expect(charactersBtn).toHaveClass(styles.active);
-  expect(charactersBtn.textContent).toBe('Hide Characters');
-  expect(itemsBtn).toHaveClass(styles.active);
-  expect(itemsBtn.textContent).toBe('Hide Items');
+  expect(objectives).toHaveClass(styles.objectivesShown);
+
+  await user.click(itemsBtn);
+
+  expect(objectives).not.toHaveClass(styles.objectivesShown);
+});
+
+test('toggling one type of objectives untoggles other type', async () => {
+  const user = userEvent.setup();
+
+  render(<Objectives {...props} />);
+
+  const charactersBtn = screen.getByRole('button', {
+    name: /toggle characters/i,
+  });
+  const itemsBtn = screen.getByRole('button', {
+    name: /toggle items/i,
+  });
+  const characterObjectives = screen.getByTestId('character-objectives');
+  const itemObjectives = screen.getByTestId('item-objectives');
+
+  await user.click(charactersBtn);
+
+  expect(characterObjectives).toHaveClass(styles.objectivesShown);
+
+  await user.click(itemsBtn);
+
+  expect(characterObjectives).not.toHaveClass(styles.objectivesShown);
+  expect(itemObjectives).toHaveClass(styles.objectivesShown);
 });
