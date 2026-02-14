@@ -2,10 +2,18 @@ import React, { useRef } from 'react';
 import styles from '@stylesheets/Objectives.module.css';
 import { SuccessIcon } from '@javascript/components/Icons/Icons';
 
+let activeButton;
+
 const TriggerButton = ({ itemType, activeRef, inactiveRef }) => {
-  const onClick = () => {
+  const onClick = (event) => {
     inactiveRef.current?.classList.remove(styles.objectivesShown);
-    activeRef.current?.classList.toggle(styles.objectivesShown);
+    const toggle = activeRef.current?.classList.toggle(styles.objectivesShown);
+
+    activeButton?.classList.remove(styles.active);
+    activeButton = event.target;
+    toggle
+      ? activeButton.classList.add(styles.active)
+      : activeButton.classList.remove(styles.active);
   };
 
   return (

@@ -5,12 +5,16 @@
   padding: 0.4rem 1rem;
   border-radius: 12px;
   border: none;
-  outline: 1px solid #59eea9;
+  outline: 1px solid #ffffff;
   transition: all 0.5s ease-in-out;
 }
 
 .trigger:first-of-type {
   margin-right: 0.5rem;
+}
+
+.trigger.active {
+  outline-color: #59eea9;
 }
 
 .objectives {

@@ -73,6 +73,7 @@ test('toggles characters on button click', async () => {
 
   await user.click(charactersBtn);
 
+  expect(charactersBtn).toHaveClass(styles.active);
   expect(objectives).toHaveClass(styles.objectivesShown);
 
   await user.click(charactersBtn);
@@ -92,6 +93,7 @@ test('toggles items on button click', async () => {
 
   await user.click(itemsBtn);
 
+  expect(itemsBtn).toHaveClass(styles.active);
   expect(objectives).toHaveClass(styles.objectivesShown);
 
   await user.click(itemsBtn);
@@ -115,10 +117,12 @@ test('toggling one type of objectives untoggles other type', async () => {
 
   await user.click(charactersBtn);
 
+  expect(charactersBtn).toHaveClass(styles.active);
   expect(characterObjectives).toHaveClass(styles.objectivesShown);
 
   await user.click(itemsBtn);
 
+  expect(charactersBtn).not.toHaveClass(styles.active);
   expect(characterObjectives).not.toHaveClass(styles.objectivesShown);
   expect(itemObjectives).toHaveClass(styles.objectivesShown);
 });
