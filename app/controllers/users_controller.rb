@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def create_anonymous_score
-    @user = User.find_by(name: "Anon") || User.new(name: "Anon")
+    @user = User.find_or_initialize_by(name: "Anon")
     @user.save(validate: false) if @user.new_record?
 
     create_user_score
